@@ -30,7 +30,7 @@ export interface FilterParams {
   isActive?: boolean
 }
 
-const API_BASE_URL = "http://localhost:8080/api"
+const API_BASE_URL = "http://18.118.126.79:8080/api"
 
 // 스터디 목록 조회 API
 export async function fetchPosts(params: FilterParams = {}): Promise<FilterPostResponse> {
