@@ -100,7 +100,7 @@ export function getLocationIdByName(name: string): number | undefined {
 }
 
 // 성별 타입
-export type Gender = "MALE" | "FEMALE"
+export type Gender = "MAN" | "WOMAN"
 
 // 회원가입 요청 타입
 export interface SignupRequest {

@@ -4,7 +4,7 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: '스터디모여 - 함께 성장하는 스터디 모집 플랫폼',
+  title: '스터디모여',
   description: '스터디모여에서 나에게 맞는 스터디를 찾고, 함께 성장하세요.',
   generator: 'v0.app',
   icons: {

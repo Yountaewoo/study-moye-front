@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
 import {
   Select,
   SelectContent,
@@ -33,7 +32,6 @@ export default function SignupPage() {
     memberBirth: "",
     memberGender: "" as Gender | "",
   })
-  const [agreeTerms, setAgreeTerms] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
@@ -248,29 +246,10 @@ export default function SignupPage() {
                     <SelectValue placeholder="성별 선택" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="MALE">남성</SelectItem>
-                    <SelectItem value="FEMALE">여성</SelectItem>
+                    <SelectItem value="MAN">남성</SelectItem>
+                    <SelectItem value="WOMAN">여성</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>
-
-              <div className="flex items-start gap-2">
-                <Checkbox
-                  id="terms"
-                  checked={agreeTerms}
-                  onCheckedChange={(checked) => setAgreeTerms(checked as boolean)}
-                  className="mt-0.5 border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary"
-                />
-                <Label htmlFor="terms" className="text-sm leading-relaxed text-muted-foreground">
-                  <Link href="/terms" className="text-primary hover:underline">
-                    서비스 이용약관
-                  </Link>
-                  {" 및 "}
-                  <Link href="/privacy" className="text-primary hover:underline">
-                    개인정보 처리방침
-                  </Link>
-                  에 동의합니다
-                </Label>
               </div>
 
               {error && (
@@ -280,7 +259,7 @@ export default function SignupPage() {
               <Button
                 type="submit"
                 className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-                disabled={!agreeTerms || isLoading}
+                disabled={isLoading}
               >
                 {isLoading ? (
                   <>
