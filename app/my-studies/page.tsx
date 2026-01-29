@@ -42,18 +42,10 @@ export default function MyStudiesPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="container mx-auto px-4 py-8">
-        <div className="mb-8 flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-foreground">내 스터디</h1>
-            <p className="mt-1 text-muted-foreground">내가 생성한 스터디 목록입니다.</p>
-          </div>
-          <Link href="/create">
-            <Button className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
-              <Plus className="h-4 w-4" />
-              새 스터디 만들기
-            </Button>
-          </Link>
+      <main className="mx-auto max-w-7xl px-4 py-8">
+        <div className="mb-8">
+          <h1 className="text-2xl font-bold text-foreground">내 스터디</h1>
+          <p className="mt-1 text-muted-foreground">내가 생성한 스터디 목록입니다.</p>
         </div>
 
         {isLoading ? (

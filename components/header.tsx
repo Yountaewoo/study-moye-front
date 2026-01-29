@@ -75,11 +75,6 @@ export function Header() {
                     내 스터디
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/profile" className="cursor-pointer">
-                    프로필 설정
-                  </Link>
-                </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout} className="cursor-pointer text-destructive">
                   <LogOut className="mr-2 h-4 w-4" />
