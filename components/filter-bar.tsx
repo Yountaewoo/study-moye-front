@@ -322,7 +322,7 @@ export function FilterBar({
           )}
         </div>
 
-        {(activeFilterCount > 0 || hasNumberFilter || hasSearchFilter) && (
+        {(activeFilterCount > 0 || hasNumberFilter) && (
           <Button
             variant="ghost"
             size="sm"
@@ -336,17 +336,8 @@ export function FilterBar({
       </div>
 
       {/* Selected Filter Tags */}
-      {(activeFilterCount > 0 || hasNumberFilter || hasSearchFilter) && (
+      {(activeFilterCount > 0 || hasNumberFilter) && (
         <div className="flex flex-wrap gap-2">
-          {/* 검색어 태그 */}
-          {hasSearchFilter && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-sm text-primary">
-              검색: {searchWord}
-              <button onClick={() => onSearchChange("")} className="hover:text-primary/70">
-                <X className="h-3 w-3" />
-              </button>
-            </span>
-          )}
           {/* 인원수 태그 */}
           {hasNumberFilter && (
             <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-sm text-primary">
