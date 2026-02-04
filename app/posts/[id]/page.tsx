@@ -29,6 +29,7 @@ import {
   type PostDetailResponse,
 } from "@/lib/api"
 import { isLoggedIn, getAuthInfo } from "@/lib/auth"
+import { linkifyText } from "@/lib/utils"
 
 export default function PostDetailPage() {
   const params = useParams()
@@ -267,9 +268,10 @@ export default function PostDetailPage() {
             {/* 내용 */}
             <div>
               <h3 className="mb-3 text-lg font-semibold text-foreground">스터디 소개</h3>
-              <div className="whitespace-pre-wrap text-muted-foreground leading-relaxed">
-                {post.content}
-              </div>
+              <div 
+                className="whitespace-pre-wrap text-muted-foreground leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: linkifyText(post.content) }}
+              />
             </div>
 
             
@@ -300,7 +302,10 @@ export default function PostDetailPage() {
                         <div className="flex items-center gap-2">
                           <span className="font-medium text-foreground">{nickname}</span>
                         </div>
-                        <p className="mt-1 text-muted-foreground">{comment.content}</p>
+                        <div 
+                          className="mt-1 text-muted-foreground"
+                          dangerouslySetInnerHTML={{ __html: linkifyText(comment.content) }}
+                        />
                       </div>
                     </div>
                   )
