@@ -186,7 +186,7 @@ export default function PostDetailPage() {
                 <Badge variant="outline">{categoryName}</Badge>
                 <Badge variant="outline">{isOnline ? "온라인" : "오프라인"}</Badge>
               </div>
-              {post.isActive && isLoggedIn() && (
+              {post.isActive && isLoggedIn() && getAuthInfo()?.memberId === post.memberId && (
                 <Button
                   onClick={handleClosePost}
                   disabled={isClosingPost}
