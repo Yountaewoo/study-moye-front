@@ -6,26 +6,12 @@ import './globals.css'
 export const metadata: Metadata = {
   title: '스터디모여',
   description: '스터디모여에서 나에게 맞는 스터디를 찾고, 함께 성장하세요.',
-  generator: 'v0.app',
   verification: {
     google: '4e2r2zjXjtl4oGhu-I6US1gbGsFVUG4XV_ABRSHib2w',
   },
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
   },
 }
 
