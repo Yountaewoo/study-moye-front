@@ -390,7 +390,7 @@ export async function createPost(data: CreatePostRequest): Promise<{ success: bo
 // 게시글 수정 API
 export async function updatePost(postId: number, data: UpdatePostRequest): Promise<{ success: boolean; data?: PostDetailResponse; error?: string }> {
   try {
-    const response = await fetch(`${API_BASE_URL}/posts/${postId}`, {
+    const response = await fetch(`${API_BASE_URL}/posts/update/${postId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
