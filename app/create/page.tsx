@@ -26,6 +26,12 @@ export default function CreateStudyPage() {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
 
+  // 오늘 날짜를 YYYY-MM-DD 형식으로 가져오기
+  const getTodayDate = () => {
+    const today = new Date()
+    return today.toISOString().split('T')[0]
+  }
+
   // 로그인 여부 확인
   useEffect(() => {
     if (!isLoggedIn()) {
@@ -42,7 +48,7 @@ export default function CreateStudyPage() {
     locationId: "",
     minNumber: "",
     maxNumber: "",
-    startDate: "",
+    startDate: getTodayDate(),
     endDate: "",
   })
 
@@ -268,7 +274,7 @@ export default function CreateStudyPage() {
                     id="minNumber"
                     type="number"
                     min="1"
-                    max="20"
+                    max="1000"
                     placeholder="예: 2"
                     value={formData.minNumber}
                     onChange={handleChange}
@@ -285,7 +291,7 @@ export default function CreateStudyPage() {
                     id="maxNumber"
                     type="number"
                     min="1"
-                    max="20"
+                    max="1000"
                     placeholder="예: 6"
                     value={formData.maxNumber}
                     onChange={handleChange}
