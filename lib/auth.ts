@@ -1,10 +1,13 @@
 // 로그인 상태 저장 키
 const AUTH_KEY = "studymoyeo_auth"
 
+export type Role = "USER" | "ADMIN"
+
 export interface UserInfo {
   memberId: number
   nickname: string
   memberEmail: string
+  role: Role
 }
 
 // 로그인 정보 저장
@@ -39,6 +42,12 @@ export function clearAuthInfo(): void {
 // 로그인 여부 확인
 export function isLoggedIn(): boolean {
   return getAuthInfo() !== null
+}
+
+// 관리자 권한 확인
+export function isAdmin(): boolean {
+  const userInfo = getAuthInfo()
+  return userInfo !== null && userInfo.role === "ADMIN"
 }
 
 // 기존 함수들 (하위 호환성)

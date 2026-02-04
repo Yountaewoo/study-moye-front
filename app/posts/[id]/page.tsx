@@ -18,6 +18,7 @@ import {
   Loader2,
   MessageSquare,
   Send,
+  Trash2,
 } from "lucide-react"
 import { Header } from "@/components/header"
 import {
@@ -28,7 +29,7 @@ import {
   getLocationNameById,
   type PostDetailResponse,
 } from "@/lib/api"
-import { isLoggedIn, getAuthInfo } from "@/lib/auth"
+import { isLoggedIn, getAuthInfo, isAdmin } from "@/lib/auth"
 import { linkifyText } from "@/lib/utils"
 
 export default function PostDetailPage() {
@@ -42,6 +43,12 @@ export default function PostDetailPage() {
   const [commentContent, setCommentContent] = useState("")
   const [isSubmittingComment, setIsSubmittingComment] = useState(false)
   const [isClosingPost, setIsClosingPost] = useState(false)
+  const [adminMode, setAdminMode] = useState(false)
+
+  useEffect(() => {
+    // 관리자 권한 확인
+    setAdminMode(isAdmin())
+  }, [])
 
   useEffect(() => {
     const loadPost = async () => {
@@ -112,6 +119,19 @@ export default function PostDetailPage() {
       alert(result.error || "모집 종료에 실패했습니다.")
     }
     setIsClosingPost(false)
+  }
+
+  const handleDeleteComment = async (commentId: number) => {
+    if (!confirm("정말로 이 댓글을 삭제하시겠습니까?")) return
+    
+    // TODO: 댓글 삭제 API 호출
+    alert(`댓글 ID ${commentId} 삭제 (API 구현 필요)`)
+    
+    // 게시글 새로고침
+    const postResult = await fetchPostDetail(postId)
+    if (postResult.success && postResult.data) {
+      setPost(postResult.data)
+    }
   }
 
   const formatDate = (dateString: string) => {
@@ -299,8 +319,20 @@ export default function PostDetailPage() {
                         </AvatarFallback>
                       </Avatar>
                       <div className="flex-1">
-                        <div className="flex items-center gap-2">
-                          <span className="font-medium text-foreground">{nickname}</span>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium text-foreground">{nickname}</span>
+                          </div>
+                          {adminMode && (
+                            <Button
+                              onClick={() => handleDeleteComment(comment.commentId)}
+                              variant="ghost"
+                              size="sm"
+                              className="h-8 text-destructive hover:text-destructive hover:bg-destructive/10"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          )}
                         </div>
                         <div 
                           className="mt-1 text-muted-foreground"

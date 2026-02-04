@@ -142,11 +142,24 @@ export interface LoginRequest {
   password: string
 }
 
+// 성별 타입 (이미 정의되어 있지만 참조용)
+// export type Gender = "MAN" | "WOMAN"
+
+// 역할 타입
+export type Role = "USER" | "ADMIN"
+
 // 로그인 응답 타입 (서버에서 쿠키로 토큰 설정)
 export interface LoginResponse {
   memberId: number
-  nickname: string
+  userLoginId: string
+  memberName: string
   memberEmail: string
+  nickname: string
+  memberImage: string
+  gender: Gender
+  role: Role
+  memberBirth: string
+  createdTime: string
 }
 
 // 로그인 API
@@ -175,6 +188,7 @@ export async function login(data: LoginRequest): Promise<{ success: boolean; dat
       memberId: loginData.memberId,
       nickname: loginData.nickname,
       memberEmail: loginData.memberEmail,
+      role: loginData.role,
     })
     
     return { success: true, data: loginData }

@@ -28,8 +28,13 @@ export default function LoginPage() {
     try {
       const result = await login({ userLoginId, password })
       
-      if (result.success) {
-        router.push("/")
+      if (result.success && result.data) {
+        // role에 따라 다른 페이지로 이동
+        if (result.data.role === "ADMIN") {
+          router.push("/admin")
+        } else {
+          router.push("/")
+        }
         router.refresh()
       } else {
         setError(result.error || "로그인에 실패했습니다.")
