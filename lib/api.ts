@@ -410,6 +410,30 @@ export async function updatePost(postId: number, data: UpdatePostRequest): Promi
   }
 }
 
+// 게시글 삭제 API
+export async function deletePost(postId: number): Promise<{ success: boolean; error?: string }> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/posts/delete/${postId}`, {
+      method: "PUT",
+      credentials: "include", // 쿠키로 인증
+    })
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        throw new Error("로그인이 필요합니다.")
+      }
+      if (response.status === 403) {
+        throw new Error("게시글 작성자만 삭제할 수 있습니다.")
+      }
+      throw new Error("게시글 삭제에 실패했습니다.")
+    }
+
+    return { success: true }
+  } catch (error) {
+    return { success: false, error: error instanceof Error ? error.message : "게시글 삭제에 실패했습니다." }
+  }
+}
+
 // 게시글 모집 종료 API
 export async function closePost(postId: number): Promise<{ success: boolean; error?: string }> {
   try {

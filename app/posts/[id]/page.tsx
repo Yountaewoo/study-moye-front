@@ -26,6 +26,7 @@ import {
   fetchPostDetail,
   createComment,
   closePost,
+  deletePost,
   getCategoryNameById,
   getLocationNameById,
   type PostDetailResponse,
@@ -44,6 +45,7 @@ export default function PostDetailPage() {
   const [commentContent, setCommentContent] = useState("")
   const [isSubmittingComment, setIsSubmittingComment] = useState(false)
   const [isClosingPost, setIsClosingPost] = useState(false)
+  const [isDeletingPost, setIsDeletingPost] = useState(false)
   const [adminMode, setAdminMode] = useState(false)
 
   useEffect(() => {
@@ -120,6 +122,21 @@ export default function PostDetailPage() {
       alert(result.error || "모집 종료에 실패했습니다.")
     }
     setIsClosingPost(false)
+  }
+
+  const handleDeletePost = async () => {
+    if (!confirm("정말로 이 게시글을 삭제하시겠습니까? 삭제된 게시글은 복구할 수 없습니다.")) return
+    
+    setIsDeletingPost(true)
+    const result = await deletePost(postId)
+    
+    if (result.success) {
+      alert("게시글이 삭제되었습니다.")
+      router.push("/")
+    } else {
+      alert(result.error || "게시글 삭제에 실패했습니다.")
+    }
+    setIsDeletingPost(false)
   }
 
   const handleDeleteComment = async (commentId: number) => {
@@ -238,6 +255,25 @@ export default function PostDetailPage() {
                       )}
                     </Button>
                   )}
+                  <Button
+                    onClick={handleDeletePost}
+                    disabled={isDeletingPost}
+                    variant="destructive"
+                    size="sm"
+                    className="gap-2"
+                  >
+                    {isDeletingPost ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        삭제 중...
+                      </>
+                    ) : (
+                      <>
+                        <Trash2 className="h-4 w-4" />
+                        삭제
+                      </>
+                    )}
+                  </Button>
                 </div>
               )}
             </div>
