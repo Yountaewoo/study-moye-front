@@ -41,6 +41,12 @@ export default function PostDetailPage() {
   const [commentContent, setCommentContent] = useState("")
   const [isSubmittingComment, setIsSubmittingComment] = useState(false)
   const [isClosingPost, setIsClosingPost] = useState(false)
+  const [currentUser, setCurrentUser] = useState<ReturnType<typeof getAuthInfo>>(null)
+
+  useEffect(() => {
+    // 클라이언트에서 사용자 정보 로드
+    setCurrentUser(getAuthInfo())
+  }, [])
 
   useEffect(() => {
     const loadPost = async () => {
@@ -157,14 +163,8 @@ export default function PostDetailPage() {
   const locationName = getLocationNameById(post.locationId)
   const isOnline = post.locationId === null
   
-  // 디버깅: 조건 확인
-  const currentUser = getAuthInfo()
+  // 작성자 여부 확인
   const isAuthor = currentUser?.memberId === post.memberId
-  console.log('Debug - isActive:', post.isActive)
-  console.log('Debug - isLoggedIn:', isLoggedIn())
-  console.log('Debug - currentUser:', currentUser)
-  console.log('Debug - post.memberId:', post.memberId)
-  console.log('Debug - isAuthor:', isAuthor)
 
   return (
     <div className="min-h-screen bg-background">
