@@ -32,7 +32,7 @@ import {
   type PostDetailResponse,
 } from "@/lib/api"
 import { isLoggedIn, getAuthInfo, isAdmin } from "@/lib/auth"
-import { linkifyText, formatRelativeTime } from "@/lib/utils"
+import { linkifyText, formatTime } from "@/lib/utils"
 
 export default function PostDetailPage() {
   const params = useParams()
@@ -374,7 +374,7 @@ export default function PostDetailPage() {
                           <div className="flex items-center gap-2">
                             <span className="font-medium text-foreground">{nickname}</span>
                             <span className="text-xs text-muted-foreground">
-                              {formatRelativeTime(comment.createdAt)}
+                              {formatTime(comment.createdAt)}
                             </span>
                           </div>
                           {adminMode && (
