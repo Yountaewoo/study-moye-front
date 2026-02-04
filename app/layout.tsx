@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: '스터디모여에서 나에게 맞는 스터디를 찾고, 함께 성장하세요.',
   generator: 'v0.app',
   verification: {
-    google: 'googled9fefa4bb5f411c5',
+    google: '4e2r2zjXjtl4oGhu-I6US1gbGsFVUG4XV_ABRSHib2w',
   },
   icons: {
     icon: [
