@@ -156,6 +156,15 @@ export default function PostDetailPage() {
   const categoryName = getCategoryNameById(post.categoryId)
   const locationName = getLocationNameById(post.locationId)
   const isOnline = post.locationId === null
+  
+  // 디버깅: 조건 확인
+  const currentUser = getAuthInfo()
+  const isAuthor = currentUser?.memberId === post.memberId
+  console.log('Debug - isActive:', post.isActive)
+  console.log('Debug - isLoggedIn:', isLoggedIn())
+  console.log('Debug - currentUser:', currentUser)
+  console.log('Debug - post.memberId:', post.memberId)
+  console.log('Debug - isAuthor:', isAuthor)
 
   return (
     <div className="min-h-screen bg-background">
@@ -186,7 +195,7 @@ export default function PostDetailPage() {
                 <Badge variant="outline">{categoryName}</Badge>
                 <Badge variant="outline">{isOnline ? "온라인" : "오프라인"}</Badge>
               </div>
-              {post.isActive && isLoggedIn() && getAuthInfo()?.memberId === post.memberId && (
+              {post.isActive && isLoggedIn() && isAuthor && (
                 <Button
                   onClick={handleClosePost}
                   disabled={isClosingPost}
