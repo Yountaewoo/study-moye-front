@@ -337,6 +337,19 @@ export interface CreatePostRequest {
   endDate: string // "YYYY-MM-DD" 형식
 }
 
+// 스터디 수정 요청 타입
+export interface UpdatePostRequest {
+  categoryId: number
+  locationId: number | null
+  title: string
+  content: string
+  maxNumber: number
+  minNumber: number
+  isOnline: boolean
+  startDate: string // "YYYY-MM-DD" 형식
+  endDate: string // "YYYY-MM-DD" 형식
+}
+
 // 스터디 생성 응답 타입
 export interface CreatePostResponse {
   postId: number
@@ -371,6 +384,29 @@ export async function createPost(data: CreatePostRequest): Promise<{ success: bo
     return { success: true, data: result }
   } catch (error) {
     return { success: false, error: error instanceof Error ? error.message : "Failed to create post" }
+  }
+}
+
+// 게시글 수정 API
+export async function updatePost(postId: number, data: UpdatePostRequest): Promise<{ success: boolean; data?: PostDetailResponse; error?: string }> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/posts/${postId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include", // 쿠키로 인증
+      body: JSON.stringify(data),
+    })
+
+    if (!response.ok) {
+      throw new Error("Failed to update post")
+    }
+
+    const result: PostDetailResponse = await response.json()
+    return { success: true, data: result }
+  } catch (error) {
+    return { success: false, error: error instanceof Error ? error.message : "Failed to update post" }
   }
 }
 

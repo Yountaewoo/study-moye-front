@@ -19,6 +19,7 @@ import {
   MessageSquare,
   Send,
   Trash2,
+  Edit,
 } from "lucide-react"
 import { Header } from "@/components/header"
 import {
@@ -195,7 +196,7 @@ export default function PostDetailPage() {
         {/* 메인 카드 */}
         <Card className="mb-6">
           <CardHeader className="pb-4">
-            {/* 배지 및 모집 종료 버튼 */}
+            {/* 배지 및 버튼 */}
             <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
               <div className="flex flex-wrap items-center gap-2">
                 <Badge
@@ -207,23 +208,37 @@ export default function PostDetailPage() {
                 <Badge variant="outline">{categoryName}</Badge>
                 <Badge variant="outline">{isOnline ? "온라인" : "오프라인"}</Badge>
               </div>
-              {post.isActive && post.isAuthor && (
-                <Button
-                  onClick={handleClosePost}
-                  disabled={isClosingPost}
-                  variant="outline"
-                  size="sm"
-                  className="border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground"
-                >
-                  {isClosingPost ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      처리중...
-                    </>
-                  ) : (
-                    "모집 종료"
+              {post.isAuthor && (
+                <div className="flex gap-2">
+                  <Link href={`/edit/${post.postId}`}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="gap-2"
+                    >
+                      <Edit className="h-4 w-4" />
+                      수정
+                    </Button>
+                  </Link>
+                  {post.isActive && (
+                    <Button
+                      onClick={handleClosePost}
+                      disabled={isClosingPost}
+                      variant="outline"
+                      size="sm"
+                      className="border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground"
+                    >
+                      {isClosingPost ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          처리중...
+                        </>
+                      ) : (
+                        "모집 종료"
+                      )}
+                    </Button>
                   )}
-                </Button>
+                </div>
               )}
             </div>
 
