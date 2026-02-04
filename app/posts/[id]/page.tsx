@@ -41,12 +41,6 @@ export default function PostDetailPage() {
   const [commentContent, setCommentContent] = useState("")
   const [isSubmittingComment, setIsSubmittingComment] = useState(false)
   const [isClosingPost, setIsClosingPost] = useState(false)
-  const [currentUser, setCurrentUser] = useState<ReturnType<typeof getAuthInfo>>(null)
-
-  useEffect(() => {
-    // 클라이언트에서 사용자 정보 로드
-    setCurrentUser(getAuthInfo())
-  }, [])
 
   useEffect(() => {
     const loadPost = async () => {
@@ -162,9 +156,6 @@ export default function PostDetailPage() {
   const categoryName = getCategoryNameById(post.categoryId)
   const locationName = getLocationNameById(post.locationId)
   const isOnline = post.locationId === null
-  
-  // 작성자 여부 확인
-  const isAuthor = currentUser?.memberId === post.memberId
 
   return (
     <div className="min-h-screen bg-background">
@@ -195,7 +186,7 @@ export default function PostDetailPage() {
                 <Badge variant="outline">{categoryName}</Badge>
                 <Badge variant="outline">{isOnline ? "온라인" : "오프라인"}</Badge>
               </div>
-              {post.isActive && isLoggedIn() && isAuthor && (
+              {post.isActive && post.isAuthor && (
                 <Button
                   onClick={handleClosePost}
                   disabled={isClosingPost}

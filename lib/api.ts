@@ -225,7 +225,7 @@ export interface PostDetailResponse {
   minNumber: number
   commentResponses: Comment[]
   isActive: boolean
-  memberId: number
+  isAuthor: boolean
   startDate: string
   endDate: string
 }
