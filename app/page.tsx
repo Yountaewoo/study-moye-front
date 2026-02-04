@@ -175,7 +175,7 @@ export default function HomePage() {
       {showCreateButton && (
         <Button
           onClick={handleCreateClick}
-          className="fixed bottom-6 right-80 z-50 h-14 w-14 rounded-full bg-primary p-0 text-primary-foreground shadow-lg transition-all hover:scale-110 hover:bg-primary/90 hover:shadow-xl"
+          className="fixed bottom-6 right-80 z-50 h-14 w-14 rounded-full bg-primary p-0 text-primary-foreground shadow-lg transition-all hover:scale-110 hover:bg-primary/90 hover:shadow-xl cursor-pointer"
           aria-label="스터디 생성"
         >
           <Plus className="h-6 w-6" />
